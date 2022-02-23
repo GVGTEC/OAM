@@ -1,0 +1,24 @@
+<div class="page-header">
+  <%= link_to pedido_itens_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Voltar
+  <% end %>
+  <%= link_to edit_pedido_item_path(@pedido_item), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Editar
+  <% end %>
+  <h2>Mostrar</h2>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Orcamento:</dt>
+  <dd><%= @pedido_item.pedido %></dd>
+  <dt>Produto:</dt>
+  <dd><%= @pedido_item.produto %></dd>
+  <dt>Quantidade:</dt>
+  <dd><%= @pedido_item.quantidade %></dd>
+  <dt>Preco unitario:</dt>
+  <dd><%= @pedido_item.preco_unitario %></dd>
+  <dt>Preco total:</dt>
+  <dd><%= @pedido_item.preco_total %></dd>
+</dl>

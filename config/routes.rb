@@ -30,6 +30,10 @@ Rails.application.routes.draw do
     resources :orcamento_itens
   end
 
+  resources :pedidos do
+    resources :pedido_itens
+  end
+
   resources :nota_fiscais do
     get 'observacoes', on: :member
 

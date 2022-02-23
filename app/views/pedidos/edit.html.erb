@@ -1,0 +1,15 @@
+<h2>Pedidos</h2>
+
+<div class="page-header">
+  <%= link_to pedidos_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Voltar
+  <% end %>
+  <%= link_to @pedido, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Mostrar
+  <% end %>
+  <h3>Alteração</h3>
+</div>
+
+<%= render 'form' %>

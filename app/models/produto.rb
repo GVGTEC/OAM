@@ -1,4 +1,4 @@
 class Produto < ApplicationRecord
   belongs_to :empresa
-  belongs_to :fornecedor
+  #belongs_to :fornecedor
 end

@@ -456,6 +456,34 @@ ActiveRecord::Schema.define(version: 2022_02_21_013331) do
     t.index ["vendedor_id"], name: "index_orcamentos_on_vendedor_id"
   end
 
+  create_table "pedido_itens", force: :cascade do |t|
+    t.bigint "pedido_id"
+    t.bigint "produto_id"
+    t.float "quantidade"
+    t.float "quantidade_entregue"
+    t.float "preco_unitario"
+    t.float "preco_total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pedido_id"], name: "index_pedido_itens_on_pedido_id"
+    t.index ["produto_id"], name: "index_pedido_itens_on_produto_id"
+  end
+
+  create_table "pedidos", force: :cascade do |t|
+    t.bigint "cliente_id"
+    t.bigint "vendedor_id"
+    t.datetime "data_emissao"
+    t.datetime "prazo_previsao_entrega"
+    t.datetime "data_previsão_entrega"
+    t.float "valor_total"
+    t.text "observacao"
+    t.string "flag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cliente_id"], name: "index_pedidos_on_cliente_id"
+    t.index ["vendedor_id"], name: "index_pedidos_on_vendedor_id"
+  end
+
   create_table "plano_contas", force: :cascade do |t|
     t.bigint "empresa_id"
     t.string "conta"
@@ -609,6 +637,10 @@ ActiveRecord::Schema.define(version: 2022_02_21_013331) do
   add_foreign_key "orcamento_itens", "orcamentos"
   add_foreign_key "orcamentos", "clientes"
   add_foreign_key "orcamentos", "vendedores"
+  add_foreign_key "pedido_itens", "pedidos"
+  add_foreign_key "pedido_itens", "produtos"
+  add_foreign_key "pedidos", "clientes"
+  add_foreign_key "pedidos", "vendedores"
   add_foreign_key "plano_contas", "empresas"
   add_foreign_key "produtos", "empresas"
   add_foreign_key "produtos", "fornecedores"

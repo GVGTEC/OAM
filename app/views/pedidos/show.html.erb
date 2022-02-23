@@ -1,0 +1,26 @@
+<div class="page-header">
+  <%= link_to pedidos_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Voltar
+  <% end %>
+  <%= link_to edit_pedido_path(@pedido), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Editar
+  <% end %>
+  <h2>Mostrar</h2>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Cliente:</dt>
+  <dd><%= @pedido.cliente.nome %></dd>
+  <dt>Vendedor:</dt>
+  <dd><%= @pedido.vendedor.nome %></dd>
+  <dt>Data emissao:</dt>
+  <dd><%= @pedido.data_emissao %></dd>
+  <dt>Valor total:</dt>
+  <dd><%= @pedido.valor_total %></dd>
+  <dt>Observacao:</dt>
+  <dd><%= @pedido.observacao %></dd>
+  <dt>Flag:</dt>
+  <dd><%= @pedido.flag %></dd>
+</dl>
