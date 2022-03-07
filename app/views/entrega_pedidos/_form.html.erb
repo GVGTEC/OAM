@@ -32,17 +32,6 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :produto, 'Produto', class: "col-sm-1 control-label" %>
-    <div class="col-sm-11">
-        <%= f.select :produto_id ,
-              Produto.reorder("descricao asc").collect{|produto| [produto.descricao, produto.id]} , 
-              {:selected => @pedido_itens.produto_id, :include_blank => true},
-              {:class =>'form-control', :onclick => "buscaProduto()"}
-        %>
-    </div>
-  </div>
- 
-  <div class="form-group">
     <%= f.label :data_entrega, 'Entrega', class: "col-sm-1 control-label" %>
     <div class="col-sm-2">
       <%= f.date_field :data_entrega, class: "form-control" %>
