@@ -6,7 +6,12 @@ class PedidoItensController < ApplicationController
     @pedido_itens = PedidoItem.where(pedido_id: @pedido.id)
   end
 
-  def show; end
+  def show
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
 
   def new
     @pedido_item = PedidoItem.new

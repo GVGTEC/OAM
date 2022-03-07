@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pedido: one
+  cliente: one
+  produto: one
+  data_entrega: 2022-03-02
+  quantidade_pedido: MyString
+  quantidade_inicial: 1
+  quantidade_entregue: 1
+  quantidade_final: 1
+
+two:
+  pedido: two
+  cliente: two
+  produto: two
+  data_entrega: 2022-03-02
+  quantidade_pedido: MyString
+  quantidade_inicial: 1
+  quantidade_entregue: 1
+  quantidade_final: 1

@@ -35,6 +35,7 @@ class PedidosController < ApplicationController
   def show
     respond_to do |format|
       format.html
+      format.json
       format.pdf do
         #render pdf: "file name", template: "produtos/show.html.erb"
         render pdf: "Pedido id: #{@pedido.id}", template: "pedidos/relatorio.pdf.html.erb"

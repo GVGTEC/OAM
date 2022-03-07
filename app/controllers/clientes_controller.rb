@@ -103,6 +103,7 @@ class ClientesController < ApplicationController
   def show
     respond_to do |format|
       format.html
+      format.json
       format.pdf do
         #render pdf: "file name", template: "clientes/show.html.erb"
         render pdf: "Cliente id: #{@cliente.id}", template: "clientes/relatorio.pdf.html.erb"

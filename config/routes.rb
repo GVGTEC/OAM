@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :entrega_pedidos
   resources :icms
   resources :cfop
   resources :terceiros

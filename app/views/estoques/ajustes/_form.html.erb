@@ -15,11 +15,11 @@
   <div class="form-group">
     <%= f.label :produto, 'Produto', class: "col-sm-1 control-label" %>
     <div class="col-sm-11">
-    <%= f.select :produto_id ,
-          Produto.reorder("descricao asc").collect{|produto| [produto.descricao, produto.id]} , 
-          {:selected => @estoque.produto_id, :include_blank => true},
-          {:class =>'form-control', :onclick => "buscaProduto()"}
-    %>
+        <%= f.select :produto_id ,
+              Produto.reorder("descricao asc").collect{|produto| [produto.descricao, produto.id]} , 
+              {:selected => @estoque.produto_id, :include_blank => true},
+              {:class =>'form-control', :onclick => "buscaProduto()"}
+        %>
     </div>
   </div>
 
