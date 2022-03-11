@@ -23,13 +23,11 @@
       <%= f.text_field :cliente, class: "form-control" %>
     </div>
   </div>
-
+  
   <div class="form-group">
     <%= f.label :produto, 'Produto', class: "col-sm-1 control-label" %>
     <div class="col-sm-10">
-      <select class="form-control" name="entrega_produto" data-js="entregaProdutos" onclick="getItem()">
-        <option value='' >Selectione</option>
-      </select>
+      <%= f.text_field :produto, class: "form-control" %>
     </div>
   </div>
 
@@ -82,46 +80,27 @@ $(document).ready(function() {
 
 function lerPedido(){   
     var idPedido = $('#pedido').val();
-    const entregaPedidoCliente = document.querySelector("#entrega_pedido_cliente")
-    const entregaProdutos = document.querySelector("[data-js='entregaProdutos']")
+
+    window.alert(idPedido);
 
     $.ajax({
       type: "GET",
       url: `/pedidos/${idPedido}.json`,
+      //url: `/pedidos.json?numero_pedido=${numero}.json`,
       success: function(pedido){
         if(pedido){
-          entregaPedidoCliente.value = pedido.cliente.nome
-          entregaPedidoCliente.disabled = true;
-   
-          pedido.produtos.forEach(produto => {
-            entregaProdutos.innerHTML += `
-              <option value='${produto.id}' >${produto.descricao}</option>
-            `
-          })
+          var idCliente = pedido.cliente_id;
+
+          getCliente(idCliente);
+          getPedidoItens(idPedido);
         }        
       }
     })
 }
 
-function getItem(){
-  var idPedido = $('#pedido').val();
-  const produto_id = document.querySelector("[data-js='entregaProdutos']").value
-
-  if(produto_id) {
-    $.ajax({
-      type: "GET",
-      url: `/pedidos/${idPedido}.json`,
-      success: function(pedido){
-        const item = pedido.itens.find(item => item.produto.id == produto_id)
-        console.log(item)
-      }
-    })
-  }
-}
-
 //function getCliente(idCliente){
 const getCliente = (idCliente) => {
-                //window.alert("Dentro do método getCliente: " + idCliente); 
+  window.alert("Dentro do método getCliente: " + idCliente); 
 
   if(idCliente){
     $.ajax({
@@ -143,20 +122,24 @@ const getPedidoItens = (idPedido) => {
   window.alert("Dentro do método getPedidoItens: " + idPedido); 
 
   if(idPedido){
+//    $.ajax({
+//      type: "GET",
+//    url: `/clientes/${idCliente}.json`,
+//    url: `/pedidoItens.json?pedido_id=${idPedido}.json`,      
+//    success: function(pedidoitens){
+//      }
+//    })
+
     $.ajax({
-      type: "GET",
-      url: `/pedido.pedido_itens?pedido_id=${idPedido}.json`,      
-      //url: `/pedidos/${idPedido}/pedido_itens`,
-      //url: `/pedidos/${idPedido}/pedido_itens`,
-      //////url: `/entrega_pedidos/#{idPedido}`,
-                  //url: `/pedidos_itens/getPedidoItens`,
-      //url: '@Url.Action("getPedidoItens")',
-                  data: { "id": 1 },
-      procesData: true,
-      success: function(pedidoitens){
-        window.alert(pedidoitens);
+      type: "POST",
+      url: '@Url.Action("getPedidoItens")',
+      data: { cep: cep },
+      success: function (result) {
+          console.log(result);
+      },
+      error: function (result) {
       }
-    })
+    });
   }    
 }
 

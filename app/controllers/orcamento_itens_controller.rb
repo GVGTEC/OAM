@@ -4,9 +4,19 @@ class OrcamentoItensController < ApplicationController
 
   def index
     @orcamento_itens = OrcamentoItem.where(orcamento_id: @orcamento.id)
-  end
 
-  def show; end
+#    respond_to do |format|
+#      format.json
+#    end
+
+  end
+  
+  def show
+    respond_to do |format|
+      format.html
+      format.json
+    end
+  end
 
   def new
     @orcamento_item = OrcamentoItem.new

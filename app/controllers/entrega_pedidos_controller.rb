@@ -1,13 +1,10 @@
 class EntregaPedidosController < ApplicationController
   before_action :set_entrega_pedido, only: %i[ show edit update destroy ]
+  # before_action :set_pedido
 
   # GET /entrega_pedidos or /entrega_pedidos.json
   def index
     @entrega_pedidos = EntregaPedido.all
-  end
-
-  def set_pedido_item
-    @pedido_item = PedidoItem.find(params[:id])
   end
 
   # GET /entrega_pedidos/1 or /entrega_pedidos/1.json
@@ -62,6 +59,10 @@ class EntregaPedidosController < ApplicationController
   end
 
   private
+    def set_pedido
+      @pedido = Pedido.find(params[:pedido_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_entrega_pedido
       @entrega_pedido = EntregaPedido.find(params[:id])

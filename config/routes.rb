@@ -32,7 +32,12 @@ Rails.application.routes.draw do
   end
 
   resources :pedidos do
-    resources :pedido_itens
+    resources :pedido_itens do
+      get 'getPedidoItens', on: :collection
+    end
+
+    #get 'pedido_itens', on: :member
+    #get '/pedidos_itens/getPedidoItens', on: :member
   end
 
   resources :nota_fiscais do
@@ -74,6 +79,10 @@ Rails.application.routes.draw do
   get '/login', to: 'login#index'
   post '/login', to: 'login#logar'
   get '/sair', to: 'login#deslogar'
+
+  #get '/pedido_pedido_item/getPedidoItens', to: '/pedido_itens#getPedidoItens'
+
+  #get '/pedido_pedido_item/getPedidoItens', to: '/pedidos#pedido_itens'
 
   #get "/orcamentos/relatorio", to: "orcamentos#relatorio"  
   #get "/orcamentos/relatorio", to: "orcamento#relatorio" 

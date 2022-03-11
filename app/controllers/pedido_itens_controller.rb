@@ -6,6 +6,14 @@ class PedidoItensController < ApplicationController
     @pedido_itens = PedidoItem.where(pedido_id: @pedido.id)
   end
 
+  # helper_method :getPedidoItens
+  # def getPedidoItens(id)
+  #   @pedidoitens = PedidoItem.where(pedido_id: id)
+  #   #@pedidoitens = PedidoItem.find_by(id)
+
+  #   debugger
+  # end
+
   def show
     respond_to do |format|
       format.html

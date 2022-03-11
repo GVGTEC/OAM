@@ -35,6 +35,7 @@ class OrcamentosController < ApplicationController
   def show
     respond_to do |format|
       format.html
+      format.json
       format.pdf do
         #render pdf: "file name", template: "produtos/show.html.erb"
         render pdf: "Orcamento id: #{@orcamento.id}", template: "orcamentos/relatorio.pdf.html.erb"
