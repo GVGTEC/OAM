@@ -26,7 +26,7 @@
 
         <div class="col-md-2">
           <%= f.label :codigo_produto, 'Código Produto' %>
-          <%= f.text_field :descricao, class: "form-control" %>
+          <%= f.text_field :codigo_produto, class: "form-control" %>
         </div>
 
         <div class="col-md-2">
@@ -39,6 +39,16 @@
         <div class="col-md-12">
           <%= f.label :descricao, 'Descrição' %>
           <%= f.text_field :descricao, class: "form-control" %>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-12">
+          <%= f.label :cliente %>
+          <%= f.select :cliente_id, 
+              Cliente.all.collect{|cliente| [cliente.nome, cliente.id]},
+              {:selected => @produto.cliente_id},
+              {:class => "form-control"} %>
         </div>
     </div>
 

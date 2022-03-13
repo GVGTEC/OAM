@@ -1,11 +1,11 @@
-<%= form_for(@entrega_pedido, html: { class: "form-horizontal", role: "form" }) do |f| %>
-  <% if @entrega_pedido.errors.any? %>
+<%= form_for([@pedido, @item, @entrega], html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <% if @entrega.errors.any? %>
     <div class="alert alert-danger alert-dismissable" role="alert">
       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       <h4>Confira os campos abaixo:</h4>
 
       <ul>
-      <% @entrega_pedido.errors.full_messages.each do |msg| %>
+      <% @entrega.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -15,7 +15,7 @@
   <div class="form-group">
     <label class="col-sm-1 control-label">Pedido</label>
     <div class="col-sm-2">
-      <input class="form-control"  type="text" id="pedido" onblur="lerPedido()">
+      <input class="form-control"  type="text" id="pedido" onblur="getPedido()">
     </div>    
 
     <%= f.label :cliente, 'Cliente', class: "col-sm-1 control-label" %>
@@ -28,10 +28,17 @@
     <%= f.label :produto, 'Produto', class: "col-sm-1 control-label" %>
     <div class="col-sm-10">
       <select class="form-control" name="entrega_produto" data-js="entregaProdutos" onclick="getItem()">
-        <option value='' >Selectione</option>
+        <option value='' >SELECIONE O PRODUTO</option>
       </select>
     </div>
   </div>
+
+  <div class="form-group">
+    <%= f.label :produto, 'Produto', class: "col-sm-1 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :produto, class: "form-control", disabled: "disable" %>
+    </div>
+  </div>  
 
   <div class="form-group">
     <%= f.label :data_entrega, 'Entrega', class: "col-sm-1 control-label" %>
@@ -40,8 +47,13 @@
     </div>
 
     <%= f.label :quantidade_pedido, 'Qtde Pedido', class: "col-sm-1 control-label" %>
-    <div class="col-sm-2">
+    <div class="col-sm-2" style="text-align: center;">
       <%= f.text_field :quantidade_pedido, class: "form-control", disabled: "disable" %>
+    </div>
+
+    <%= f.label :quantidade_ja_entregue, 'Quantidade Já Entregue', class: "col-sm-1 control-label" %>
+    <div class="col-sm-2" style="text-align: center;">
+      <input type="text" name="quantidade_ja_entregue" id="quantidade_ja_entregue"  class="form-control" disabled>
     </div>
   </div>
   
@@ -80,15 +92,17 @@ $(document).ready(function() {
   });
 });
 
-function lerPedido(){   
+function getPedido(){   
     var idPedido = $('#pedido').val();
+
     const entregaPedidoCliente = document.querySelector("#entrega_pedido_cliente")
     const entregaProdutos = document.querySelector("[data-js='entregaProdutos']")
-
+    
     $.ajax({
       type: "GET",
       url: `/pedidos/${idPedido}.json`,
-      success: function(pedido){
+      success: function(pedido){ 
+        debugger  
         if(pedido){
           entregaPedidoCliente.value = pedido.cliente.nome
           entregaPedidoCliente.disabled = true;
@@ -103,23 +117,6 @@ function lerPedido(){
     })
 }
 
-function getItem(){
-  var idPedido = $('#pedido').val();
-  const produto_id = document.querySelector("[data-js='entregaProdutos']").value
-
-  if(produto_id) {
-    $.ajax({
-      type: "GET",
-      url: `/pedidos/${idPedido}.json`,
-      success: function(pedido){
-        const item = pedido.itens.find(item => item.produto.id == produto_id)
-        console.log(item)
-      }
-    })
-  }
-}
-
-//function getCliente(idCliente){
 const getCliente = (idCliente) => {
                 //window.alert("Dentro do método getCliente: " + idCliente); 
 
@@ -134,6 +131,26 @@ const getCliente = (idCliente) => {
 
           document.getElementById("entrega_pedido_cliente").disabled = true;
         }
+      }
+    })
+  }
+}
+
+function getItem(){
+  var idPedido = $('#pedido').val();
+
+  const idProduto = document.querySelector("[data-js='entregaProdutos']").value
+
+  if(idProduto) {
+    $.ajax({
+      type: "GET",
+      url: `/pedidos/${idPedido}.json`,
+      success: function(pedido){
+        const item = pedido.itens.find(item => item.produto.id == idProduto)
+        console.log(item)
+
+        $('#entrega_pedido_produto').val(item.produto.descricao)
+        $('#entrega_pedido_quantidade_pedido').val(item.quantidade)
       }
     })
   }

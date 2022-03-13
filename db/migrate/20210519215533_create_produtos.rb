@@ -4,6 +4,7 @@ class CreateProdutos < ActiveRecord::Migration[5.2]
       t.references :empresa, foreign_key: true
       t.references :localizacao_estoque, foreign_key: true
       t.references :fornecedor, foreign_key: true
+      t.references :cliente, foreign_key: true
       t.string :codigo_produto
       t.string :codigo_producao            
       t.string :situacao

@@ -26,7 +26,7 @@
     <tbody>
       <%= content_tag_for(:tr, @pedidos) do |pedido| %>
         <td style="text-align: end;"><%= pedido.id %></td>
-        <td><%= pedido.cliente.nome rescue "" %><%= pedido.cliente.nome rescue "" %></td>
+        <td><%= pedido.cliente.nome rescue "" %></td>
         <td style="text-align: center;"><%= pedido.data_emissao.strftime("%d/%m/%Y") rescue "" %></td>
         <td style="text-align: end;"><%= number_to_currency(pedido.valor_total) %></td>
         <td><%= link_to 'Itens', pedido_pedido_itens_path(pedido) %></td>

@@ -24,6 +24,7 @@
         <th>Qtde</th>
         <th>Preço Unitário</th>
         <th>Preço Total</th>
+        <th></th>
       </tr>
     </thead>
 
@@ -34,6 +35,7 @@
         <td><%= formatar_qtd(pedido_item.quantidade) %></td>
         <td style="text-align: end;"><%= number_to_currency(pedido_item.preco_unitario) %></td>
         <td style="text-align: end;"><%= number_to_currency(pedido_item.preco_total) %></td>
+        <td style="text-align: end;"><%= link_to 'Entregas', pedido_pedido_item_entrega_pedidos_path(@pedido, pedido_item), class: "btn btn-primary"  %></td>
       <% end %>
     </tbody>
   </table>

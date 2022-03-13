@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_02_211001) do
+ActiveRecord::Schema.define(version: 2022_03_13_211517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,7 +189,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_211001) do
   end
 
   create_table "entrega_pedidos", force: :cascade do |t|
-    t.bigint "pedido_id"
+    t.bigint "pedido_item_id"
     t.bigint "cliente_id"
     t.bigint "produto_id"
     t.date "data_entrega"
@@ -200,7 +200,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_211001) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cliente_id"], name: "index_entrega_pedidos_on_cliente_id"
-    t.index ["pedido_id"], name: "index_entrega_pedidos_on_pedido_id"
+    t.index ["pedido_item_id"], name: "index_entrega_pedidos_on_pedido_item_id"
     t.index ["produto_id"], name: "index_entrega_pedidos_on_produto_id"
   end
 
@@ -481,6 +481,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_211001) do
     t.float "preco_total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "data_previsao_entrega"
     t.index ["pedido_id"], name: "index_pedido_itens_on_pedido_id"
     t.index ["produto_id"], name: "index_pedido_itens_on_produto_id"
   end
@@ -514,6 +515,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_211001) do
     t.bigint "empresa_id"
     t.bigint "localizacao_estoque_id"
     t.bigint "fornecedor_id"
+    t.bigint "cliente_id"
     t.string "codigo_produto"
     t.string "codigo_producao"
     t.string "situacao"
@@ -545,6 +547,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_211001) do
     t.float "estoque_minimo", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cliente_id"], name: "index_produtos_on_cliente_id"
     t.index ["empresa_id"], name: "index_produtos_on_empresa_id"
     t.index ["fornecedor_id"], name: "index_produtos_on_fornecedor_id"
     t.index ["localizacao_estoque_id"], name: "index_produtos_on_localizacao_estoque_id"
@@ -630,7 +633,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_211001) do
   add_foreign_key "contas_rec", "plano_contas"
   add_foreign_key "contas_rec_parcelas", "contas_rec"
   add_foreign_key "entrega_pedidos", "clientes"
-  add_foreign_key "entrega_pedidos", "pedidos"
+  add_foreign_key "entrega_pedidos", "pedido_itens"
   add_foreign_key "entrega_pedidos", "produtos"
   add_foreign_key "estoques", "empresas"
   add_foreign_key "estoques", "fornecedores"
@@ -665,6 +668,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_211001) do
   add_foreign_key "pedidos", "clientes"
   add_foreign_key "pedidos", "vendedores"
   add_foreign_key "plano_contas", "empresas"
+  add_foreign_key "produtos", "clientes"
   add_foreign_key "produtos", "empresas"
   add_foreign_key "produtos", "fornecedores"
   add_foreign_key "produtos", "localizacao_estoques"

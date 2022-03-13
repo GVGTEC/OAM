@@ -1,7 +1,7 @@
 class CreateEntregaPedidos < ActiveRecord::Migration[5.2]
   def change
     create_table :entrega_pedidos do |t|
-      t.references :pedido, foreign_key: true
+      t.references :pedido_item, foreign_key: true
       t.references :cliente, foreign_key: true
       t.references :produto, foreign_key: true
       t.date :data_entrega

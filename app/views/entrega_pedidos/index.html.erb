@@ -1,7 +1,7 @@
 <h3>Entregas Pedidos</h3>
 
 <div class="page-header">
-  <%= link_to new_entrega_pedido_path, class: 'btn btn-primary' do %>
+  <%= link_to new_pedido_pedido_item_entrega_pedido_path(@pedido, @item), class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
     Novo
   <% end %>
@@ -15,11 +15,11 @@
             <th>Pedido</th>
             <th>Cliente</th>
             <th>Produto</th>
-            <th>Data entrega</th>
-            <th>Quantidade pedido</th>
-            <th>Quantidade inicial</th>
-            <th>Quantidade entregue</th>
-            <th>Quantidade final</th>
+            <th>Data Entrega</th>
+            <th>Qtde Pedido</th>
+            <th>Qtde Inicial</th>
+            <th>Qtde Entregue</th>
+            <th>Qtde Final</th>
             <th></th>
         <th></th>
         <th></th>
@@ -27,18 +27,18 @@
     </thead>
 
     <tbody>
-      <%= content_tag_for(:tr, @entrega_pedidos) do |entrega_pedido| %>
-            <td><%= entrega_pedido.pedido %></td>
-            <td><%= entrega_pedido.cliente %></td>
-            <td><%= entrega_pedido.produto %></td>
-            <td><%= entrega_pedido.data_entrega %></td>
-            <td><%= entrega_pedido.quantidade_pedido %></td>
-            <td><%= entrega_pedido.quantidade_inicial %></td>
-            <td><%= entrega_pedido.quantidade_entregue %></td>
-            <td><%= entrega_pedido.quantidade_final %></td>
-            <td><%= link_to 'Mostrar', entrega_pedido %></td>
-        <td><%= link_to 'Editar', edit_entrega_pedido_path(entrega_pedido) %></td>
-        <td><%= link_to 'Apagar', entrega_pedido, method: :delete, data: { confirm: 'Confirma ?' } %></td>
+      <%= content_tag_for(:tr, @entregas) do |entrega| %>
+            <td><%= entrega.pedido %></td>
+            <td><%= entrega.cliente %></td>
+            <td><%= entrega.produto %></td>
+            <td><%= entrega.data_entrega %></td>
+            <td><%= entrega.quantidade_pedido %></td>
+            <td><%= entrega.quantidade_inicial %></td>
+            <td><%= entrega.quantidade_entregue %></td>
+            <td><%= entrega.quantidade_final %></td>
+            <td><%= link_to 'Mostrar', pedido_pedido_item_entrega_pedido_path(@pedido, @item, entrega) %></td>
+        <td><%= link_to 'Editar', edit_pedido_pedido_item_entrega_pedido_path(@pedido, @item, entrega) %></td>
+        <td><%= link_to 'Apagar', pedido_pedido_item_entrega_pedido_path(@pedido, @item, entrega), method: :delete, data: { confirm: 'Confirma ?' } %></td>
       <% end %>
     </tbody>
   </table>

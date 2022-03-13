@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :entrega_pedidos
   resources :icms
   resources :cfop
   resources :terceiros
@@ -33,11 +32,8 @@ Rails.application.routes.draw do
 
   resources :pedidos do
     resources :pedido_itens do
-      get 'getPedidoItens', on: :collection
+      resources :entrega_pedidos
     end
-
-    #get 'pedido_itens', on: :member
-    #get '/pedidos_itens/getPedidoItens', on: :member
   end
 
   resources :nota_fiscais do

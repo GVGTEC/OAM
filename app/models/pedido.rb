@@ -1,9 +1,7 @@
 class Pedido < ApplicationRecord
   belongs_to :cliente
   belongs_to :vendedor
-  #belongs_to :empresa
+  belongs_to :empresa, optional: true
 
-  #before_validation :salvar_empresa
-
-  has_many :pedido_itens, dependent: :destroy
+  has_many :itens, class_name: 'PedidoItem',  dependent: :destroy
 end

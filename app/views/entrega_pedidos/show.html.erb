@@ -1,11 +1,11 @@
 <h3>Entrega Pedido</h3>
 
 <div class="page-header">
-  <%= link_to entrega_pedidos_path, class: 'btn btn-default' do %>
+  <%= link_to  pedido_pedido_item_entrega_pedidos_path(@pedido, @item), class: 'btn btn-default' do %>
     <span class="glyphicon glyphicon-list-alt"></span>
     Voltar
   <% end %>
-  <%= link_to edit_entrega_pedido_path(@entrega_pedido), class: 'btn btn-primary' do %>
+  <%= link_to edit_pedido_pedido_item_entrega_pedido_path(@pedido, @item, @entrega), class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-pencil"></span>
     Editar
   <% end %>
@@ -14,19 +14,19 @@
 
 <dl class="dl-horizontal">
   <dt>Pedido:</dt>
-  <dd><%= @entrega_pedido.pedido %></dd>
+  <dd><%= @entrega.pedido %></dd>
   <dt>Cliente:</dt>
-  <dd><%= @entrega_pedido.cliente %></dd>
+  <dd><%= @entrega.cliente %></dd>
   <dt>Produto:</dt>
-  <dd><%= @entrega_pedido.produto %></dd>
+  <dd><%= @entrega.produto %></dd>
   <dt>Data entrega:</dt>
-  <dd><%= @entrega_pedido.data_entrega %></dd>
+  <dd><%= @entrega.data_entrega %></dd>
   <dt>Quantidade pedido:</dt>
-  <dd><%= @entrega_pedido.quantidade_pedido %></dd>
+  <dd><%= @entrega.quantidade_pedido %></dd>
   <dt>Quantidade inicial:</dt>
-  <dd><%= @entrega_pedido.quantidade_inicial %></dd>
+  <dd><%= @entrega.quantidade_inicial %></dd>
   <dt>Quantidade entregue:</dt>
-  <dd><%= @entrega_pedido.quantidade_entregue %></dd>
+  <dd><%= @entrega.quantidade_entregue %></dd>
   <dt>Quantidade final:</dt>
-  <dd><%= @entrega_pedido.quantidade_final %></dd>
+  <dd><%= @entrega.quantidade_final %></dd>
 </dl>

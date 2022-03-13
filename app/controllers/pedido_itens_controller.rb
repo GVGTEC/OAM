@@ -25,7 +25,9 @@ class PedidoItensController < ApplicationController
     @pedido_item = PedidoItem.new
 
     @produtos = Produto.where(empresa_id: @adm.empresa.id)
+    @produtos = @produtos.where(cliente_id: @pedido.cliente_id)
     @produtos = @produtos.order('descricao asc')
+
     #@produtos = @produtos.joins('inner join estoques on estoques.produto_id = produtos.id')
     #@produtos = @produtos.having("sum(estoques.estoque_atual_lote) > '0'").group(:id, :descricao)
   end
@@ -46,7 +48,8 @@ class PedidoItensController < ApplicationController
             produto_id: produto.id,
             quantidade: pedido_item[:qtd],
             preco_unitario: formatar_preco(pedido_item[:preco_unitario]),
-            preco_total: formatar_preco(pedido_item[:preco_total])
+            preco_total: formatar_preco(pedido_item[:preco_total]),
+            data_previsao_entrega: pedido_item[:data_previsao_entrega]
           )
           
           @pedido_item.save
@@ -57,7 +60,7 @@ class PedidoItensController < ApplicationController
         end
       end
 
-      @pedido.valor_total = @pedido.pedido_itens.sum(:preco_total)
+      @pedido.valor_total = @pedido.itens.sum(:preco_total)
       #@pedido.valor_total = @pedido.calculo_valor_total_nota
       #@pedido.valor_total = @pedido.valor_sub_total.to_f - @pedido.valor_desconto.to_f
       @pedido.save

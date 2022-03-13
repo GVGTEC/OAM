@@ -9,6 +9,7 @@ json.itens pedido.pedido_itens do |item|
     json.quantidade item.quantidade
     json.entregue item.quantidade_entregue
     json.preco_unitario item.preco_unitario
+    
     json.produto do
         json.id item.produto.id
         json.descricao item.produto.descricao

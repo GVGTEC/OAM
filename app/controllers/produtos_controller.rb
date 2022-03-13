@@ -127,13 +127,8 @@ class ProdutosController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html
-      format.pdf do
-        #render pdf: "file name", template: "produtos/show.html.erb"
-        render pdf: "Produto id: #{@produto.id}", template: "produtos/relatorio.pdf.html.erb"
-      end
-    end
+    return unless params[:format] == "pdf"
+    render pdf: "Produto id: #{@produto.id}", template: "produtos/relatorio.pdf.html.erb"
   end
 
   def new
@@ -187,9 +182,9 @@ class ProdutosController < ApplicationController
   end
                                              
   def produto_params
-    params.require(:produto).permit(:localizacao_estoque_id, :fornecedor_id, :codigo_produto, :situacao, :data_inativo, :descricao, :descricao_complementar, :codigo_fabricante, :codigo_barras, :ncm, :situacao_tributaria, :unidade, 
+    params.require(:produto).permit(:localizacao_estoque_id, :fornecedor_id, :cliente_id, :codigo_produto, :situacao, :data_inativo, :descricao, :descricao_complementar, :codigo_fabricante, :codigo_barras, :ncm, :situacao_tributaria, :unidade, 
                                     :embalagem, :controlar_estoque, :por_lote, :bloquear_preco, :data_ultima_reposicao, :data_ultimo_reajuste, :preco_custo, :preco_custo_medio, :margem_lucro, :preco_venda, 
-                                    :preco_oferta, :margem_lucro_oferta, :data_inicial_oferta, :data_final_oferta, :comissao_pc, :estoque_atual, :estoque_minimo, :origem)
+                                    :preco_oferta, :margem_lucro_oferta, :data_inicial_oferta, :data_final_oferta, :comissao_pc, :estoque_atual, :estoque_minimo, :origem, :codigo_producao)
   end
 
   def separate_comma(number)
