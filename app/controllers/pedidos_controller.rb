@@ -24,7 +24,12 @@ class PedidosController < ApplicationController
     #@nota_fiscais = empresa.nota_fiscais (HABILITAR QUANDO CRIAR O CAMPO EMPRESA NO ORCAMENTO)
 
     @pedidos = Pedido.all
-    @pedidos = @pedidos.order('Id desc')
+
+    # if params[:pedido_cliente].present?
+    #   @pedido = @pedido.joins(:cliente).where("lower(cliente.nome) ilike ?", "%#{params[:pedido_cliente].downcase}%")
+    # end
+
+    @pedidos = @pedidos.order(created_at: :desc)
    
     # @pedidos = Pedido.where(empresa_id: @adm.empresa.id)   O CAMPO EMPRESA_ID AINDA NÃO EXISTE NA TABELA DE ORÇAMENTO
 
