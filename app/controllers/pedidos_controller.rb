@@ -22,7 +22,6 @@ class PedidosController < ApplicationController
 
   def index
     #@nota_fiscais = empresa.nota_fiscais (HABILITAR QUANDO CRIAR O CAMPO EMPRESA NO ORCAMENTO)
-
     @pedidos = Pedido.all
 
     # if params[:pedido_cliente].present?
