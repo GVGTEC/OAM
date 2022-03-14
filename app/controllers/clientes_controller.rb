@@ -4,7 +4,6 @@ class ClientesController < ApplicationController
 
   def index
     @clientes = empresa.clientes
-    
     if params[:busca].present?
       @clientes = @clientes.where("
         (lower(nome) ilike '%#{params[:busca].downcase}%') OR
