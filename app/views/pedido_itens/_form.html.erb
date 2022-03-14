@@ -13,7 +13,7 @@
       <thead>
         <tr>
           <th></th>
-          <th style="width: 60px;">Código</th>
+          <th style="width: 120px;">Código</th>
           <th style="width: 340px;">Descrição</th>
           <th style="width: 125px;">Quantidade</th>
           <th style="width: 135px;">Preço Unitário</th>
@@ -27,7 +27,7 @@
         <% @pedido.itens.each_with_index do |pedido_item, index| %>
           <tr id="<%= index+1 %>" class="operacao">
             <td><%= index+1 %></td>
-            <td><input class="form-control" id="<%= index+1 %>-cod_produto" data-behavior="cod_produto" type='text' value="<%= pedido_item.produto.codigo_produto %>" style='width: 120px;' name='pedido[pedido_item][][cod_produto]'></td>
+            <td><input class="form-control" id="<%= index+1 %>-cod_produto" data-behavior="cod_produto" type='text' value="<%= pedido_item.produto.codigo_produto %>" name='pedido[pedido_item][][cod_produto]'></td>
             <td>
               <%= f.select :descricao,
                 Produto.all.reorder("descricao asc").collect { |produto| [produto.descricao, produto.codigo_produto] },
