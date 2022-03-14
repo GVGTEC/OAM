@@ -101,6 +101,6 @@ class PedidosController < ApplicationController
   end
 
   def pedido_params
-    params.require(:pedido).permit(:cliente_id, :vendedor_id, :data_emissao, :valor_sub_total, :valor_desconto, :valor_total, :observacao, :flag)
+    params.require(:pedido).permit(:cliente_id, :vendedor_id, :numero_pedido_cliente, :data_emissao, :valor_sub_total, :valor_desconto, :valor_total, :observacao, :flag)
   end
 end

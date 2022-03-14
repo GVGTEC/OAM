@@ -36,15 +36,14 @@ class PedidoItensController < ApplicationController
 
   def create
     if params[:pedido].key?(:pedido_item)
-      PedidoItem.where(pedido: @pedido.id).destroy_all
+      @pedido.itens.destroy_all
 
       params[:pedido][:pedido_item].each do |pedido_item|
         next if pedido_item[:cod_produto].blank?
 
         begin
-          produto = Produto.find(pedido_item[:cod_produto])
-          @pedido_item = PedidoItem.new(
-            pedido_id: @pedido.id,
+          produto = Produto.find_by(codigo_produto: pedido_item[:cod_produto])
+          @pedido_item = @pedido.itens.new(
             produto_id: produto.id,
             quantidade: pedido_item[:qtd],
             preco_unitario: formatar_preco(pedido_item[:preco_unitario]),
@@ -110,7 +109,7 @@ class PedidoItensController < ApplicationController
   end
 
   def formatar_preco(valor)
-    valor.gsub('.', '').gsub('R$', '').to_f
+    valor.tr('R$', '').tr('.', '').tr(',', '.').to_f
   end
 
   def pedido_item_params

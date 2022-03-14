@@ -131,6 +131,17 @@ class ProdutosController < ApplicationController
     render pdf: "Produto id: #{@produto.id}", template: "produtos/relatorio.pdf.html.erb"
   end
 
+  def get_by_codigo_produto
+    @produto = Produto.find_by(codigo_produto: params[:codigo_produto])
+    respond_to do |format|
+      if @produto.present?
+        format.json { render :show, status: :ok, location: @produto }
+      else
+        format.json { render json: @produto.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def new
     @produto = Produto.new
   end

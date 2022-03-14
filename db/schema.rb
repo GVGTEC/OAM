@@ -485,6 +485,7 @@ ActiveRecord::Schema.define(version: 2022_03_13_232058) do
   create_table "pedidos", force: :cascade do |t|
     t.bigint "cliente_id"
     t.bigint "vendedor_id"
+    t.string "numero_pedido_cliente"
     t.datetime "data_emissao"
     t.datetime "prazo_previsao_entrega"
     t.datetime "data_previsão_entrega"

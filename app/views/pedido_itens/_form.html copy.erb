@@ -1,0 +1,67 @@
+<%= form_for([@pedido, @pedido_item], html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <div class="form-group">
+    <div class="col-sm-12">
+      <label class="control-label">Nº Pedido: </label>
+      <h3><%= @pedido.id %></h3>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="table-responsive">
+    <table class="table table-hover table-striped table-bordered user-select-none dinamicTable jsDinamicTable_pedido_id_<%= @pedido.id %>">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Código</th>
+          <th>Descrição</th>
+          <th>Quantidade</th>
+          <th>Preço Unitário</th>
+          <th>Preço Total</th>
+          <th>Data Entrega</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody id="tableBody_pedido_id_<%= @pedido.id %>">
+        <% @pedido.itens.each_with_index do |pedido_item, index| %>
+          <tr id="<%= index+1 %>" class="operacao">
+            <td><%= index+1 %></td>
+            <td><input class="form-control" id="<%= index+1 %>-cod_produto" data-behavior="cod_produto" type='text' value="<%= pedido_item.produto.id %>" style='width: 55px;' name='pedido[pedido_item][][cod_produto]'></td>
+            <td>
+              <%= f.select :descricao,
+                Produto.all.reorder("descricao asc").collect { |produto| [produto.descricao, produto.id] },
+                {:selected => pedido_item.produto.id },
+                {:class=> 'form-control', name: 'pedido[pedido_item][][descricao]', onclick: "atualizaProduto()", id: "#{index+1}-descricao"} 
+              %> 
+            </td>
+            <td><input class='form-control' id='<%= index+1 %>-qtd'            type='number' value='<%= formatar_qtd(pedido_item.quantidade) %>'           name='pedido[pedido_item][][qtd]'            style='width: 70px;' min="0" data-behavior='qtd'        ></td>         
+            <td><input class='form-control' id='<%= index+1 %>-preco_unitario' type='text' value='<%= number_to_currency(pedido_item.preco_unitario) %>' name='pedido[pedido_item][][preco_unitario]' style='width: 95px;' data-behavior='preco_unitario'></td>
+            <td><input class='form-control' id='<%= index+1 %>-preco_total'    type='text' value='<%= number_to_currency(pedido_item.preco_total) %>'    name='pedido[pedido_item][][preco_total]'   readonly style="width: 110px;" data-behavior='preco_total'></td>
+            <td><input class='form-control' id='<%= index+1 %>-data_previsao_entrega'   type='date' value='<%= pedido_item.data_previsao_entrega.strftime("%Y-%m-%d") rescue "" %>'    name='pedido[pedido_item][][data_previsao_entrega]' data-behavior='data_previsao_entrega'></td>
+            
+            <td><button type='button' id='<%= index+1 %>-delete' data-behavior='delete' class='btn btn-danger delete'>x</button></td></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="form-group">
+    <div class="col-sm-6"></div>
+    <div class="col-sm-6" style="text-align:end">
+     <p><b>Valor Total:<b></p>
+     <p class="valor-total" style="font-size: 30px"></p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-10">
+      <%= f.submit "Salvar", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<%= render 'script' %>

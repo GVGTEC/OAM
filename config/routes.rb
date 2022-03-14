@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   end
 
   resources :produtos do
+    get 'get_by_codigo_produto', on: :collection
     post 'importar', on: :collection
   end
 

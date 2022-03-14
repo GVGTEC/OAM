@@ -3,6 +3,7 @@ class CreatePedidos < ActiveRecord::Migration[5.2]
     create_table :pedidos do |t|
       t.references :cliente, foreign_key: true
       t.references :vendedor, foreign_key: true
+      t.string :numero_pedido_cliente
       t.datetime :data_emissao
       t.datetime :prazo_previsao_entrega
       t.datetime :data_previsão_entrega
