@@ -14,11 +14,11 @@
 
 <dl class="dl-horizontal">
   <dt>Pedido:</dt>
-  <dd><%= @entrega.pedido %></dd>
+  <dd><%= @pedido.id %></dd>
   <dt>Cliente:</dt>
-  <dd><%= @entrega.cliente %></dd>
+  <dd><%= @pedido.cliente.nome %></dd>
   <dt>Produto:</dt>
-  <dd><%= @entrega.produto %></dd>
+  <dd><%= @item.produto.descricao %></dd>
   <dt>Data entrega:</dt>
   <dd><%= @entrega.data_entrega %></dd>
   <dt>Quantidade pedido:</dt>

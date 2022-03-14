@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_211517) do
+ActiveRecord::Schema.define(version: 2022_03_13_232058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,8 +190,6 @@ ActiveRecord::Schema.define(version: 2022_03_13_211517) do
 
   create_table "entrega_pedidos", force: :cascade do |t|
     t.bigint "pedido_item_id"
-    t.bigint "cliente_id"
-    t.bigint "produto_id"
     t.date "data_entrega"
     t.string "quantidade_pedido"
     t.integer "quantidade_inicial"
@@ -199,9 +197,7 @@ ActiveRecord::Schema.define(version: 2022_03_13_211517) do
     t.integer "quantidade_final"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cliente_id"], name: "index_entrega_pedidos_on_cliente_id"
     t.index ["pedido_item_id"], name: "index_entrega_pedidos_on_pedido_item_id"
-    t.index ["produto_id"], name: "index_entrega_pedidos_on_produto_id"
   end
 
   create_table "estoques", force: :cascade do |t|
@@ -632,9 +628,7 @@ ActiveRecord::Schema.define(version: 2022_03_13_211517) do
   add_foreign_key "contas_rec", "empresas"
   add_foreign_key "contas_rec", "plano_contas"
   add_foreign_key "contas_rec_parcelas", "contas_rec"
-  add_foreign_key "entrega_pedidos", "clientes"
   add_foreign_key "entrega_pedidos", "pedido_itens"
-  add_foreign_key "entrega_pedidos", "produtos"
   add_foreign_key "estoques", "empresas"
   add_foreign_key "estoques", "fornecedores"
   add_foreign_key "estoques", "produtos"

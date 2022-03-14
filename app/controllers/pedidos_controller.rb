@@ -85,6 +85,9 @@ class PedidosController < ApplicationController
       format.html { redirect_to pedidos_url, notice: 'Pedido Excluído' }
       format.json { head :no_content }
     end
+
+  rescue
+    redirect_to pedidos_path, notice: "Pedido possui entregas"
   end
 
   private

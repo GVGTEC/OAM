@@ -5,6 +5,10 @@
     <span class="glyphicon glyphicon-plus"></span>
     Novo
   <% end %>
+  <%= link_to  pedido_pedido_itens_path(@pedido), class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Voltar
+  <% end %>
   <h3>Lista</h3>
 </div>
 
@@ -20,25 +24,19 @@
             <th>Qtde Inicial</th>
             <th>Qtde Entregue</th>
             <th>Qtde Final</th>
-            <th></th>
-        <th></th>
-        <th></th>
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @entregas) do |entrega| %>
-            <td><%= entrega.pedido %></td>
-            <td><%= entrega.cliente %></td>
-            <td><%= entrega.produto %></td>
+            <td><%= @pedido.id %></td>
+            <td><%= @pedido.cliente.nome %></td>
+            <td><%= @item.produto.descricao %></td>
             <td><%= entrega.data_entrega %></td>
             <td><%= entrega.quantidade_pedido %></td>
             <td><%= entrega.quantidade_inicial %></td>
             <td><%= entrega.quantidade_entregue %></td>
             <td><%= entrega.quantidade_final %></td>
-            <td><%= link_to 'Mostrar', pedido_pedido_item_entrega_pedido_path(@pedido, @item, entrega) %></td>
-        <td><%= link_to 'Editar', edit_pedido_pedido_item_entrega_pedido_path(@pedido, @item, entrega) %></td>
-        <td><%= link_to 'Apagar', pedido_pedido_item_entrega_pedido_path(@pedido, @item, entrega), method: :delete, data: { confirm: 'Confirma ?' } %></td>
       <% end %>
     </tbody>
   </table>

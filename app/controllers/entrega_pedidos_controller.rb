@@ -3,7 +3,7 @@ class EntregaPedidosController < ApplicationController
   before_action :set_entrega_pedido, only: %i[ show edit update destroy ]
 
   def index
-    @entrega = @item.entregas.all
+    @entregas = @item.entregas
   end
 
   def show
@@ -21,7 +21,7 @@ class EntregaPedidosController < ApplicationController
 
     respond_to do |format|
       if @entrega.save
-        format.html { redirect_to entrega_pedido_url(@entrega), notice: "Entrega pedido was successfully created." }
+        format.html { redirect_to pedido_pedido_item_entrega_pedidos_path(@pedido, @item), notice: "Entrega pedido was successfully created." }
         format.json { render :show, status: :created, location: @entrega }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -33,7 +33,7 @@ class EntregaPedidosController < ApplicationController
   def update
     respond_to do |format|
       if @entrega.update(entrega_pedido_params)
-        format.html { redirect_to entrega_pedido_url(@entrega), notice: "Entrega pedido was successfully updated." }
+        format.html { redirect_to pedido_pedido_item_entrega_pedidos_path(@pedido, @item), notice: "Entrega pedido was successfully updated." }
         format.json { render :show, status: :ok, location: @entrega }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -46,7 +46,7 @@ class EntregaPedidosController < ApplicationController
     @entrega.destroy
 
     respond_to do |format|
-      format.html { redirect_to entrega_pedidos_url, notice: "Entrega pedido was successfully destroyed." }
+      format.html { redirect_to pedido_pedido_item_entrega_pedidos_path(@pedido, @item), notice: "Entrega pedido was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -61,10 +61,10 @@ class EntregaPedidosController < ApplicationController
     end
 
     def set_entrega_pedido
-      @entregas = @item.entregas.find(params[:id])
+      @entrega = @item.entregas.find(params[:id])
     end
 
     def entrega_pedido_params
-      params.require(:entrega_pedido).permit(:pedido_id, :cliente_id, :produto_id, :data_entrega, :quantidade_pedido, :quantidade_inicial, :quantidade_entregue, :quantidade_final)
+      params.require(:entrega_pedido).permit(:data_entrega, :quantidade_pedido, :quantidade_inicial, :quantidade_entregue, :quantidade_final)
     end
 end
