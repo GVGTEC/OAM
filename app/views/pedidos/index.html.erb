@@ -15,10 +15,10 @@
     <thead>
       <tr>
         <th style="width:100px;">Pedido</th>
+        <th style="width:100px;">Pedido Cliente</th>
         <th style="width:800px;">Cliente</th>
         <th style="width:100px;">Data Emissão</th>
         <th style="width:100px;">Valor Total</th>
-        <th></th>
         <th></th>
         <th></th>
         <th></th>
@@ -28,11 +28,11 @@
     <tbody>
       <%= content_tag_for(:tr, @pedidos) do |pedido| %>
         <td style="text-align: end;"><%= pedido.id %></td>
+        <td style="text-align: end;"><%= pedido.numero_pedido_cliente %></td>
         <td><%= pedido.cliente.nome rescue "" %></td>
         <td style="text-align: center;"><%= pedido.data_emissao.strftime("%d/%m/%Y") rescue "" %></td>
         <td style="text-align: end;"><%= number_to_currency(pedido.valor_total) %></td>
         <td><%= link_to 'Itens', pedido_pedido_itens_path(pedido) %></td>
-        <td><%= link_to 'PDF', pedido_path(pedido, format: :pdf), class:"btn btn-success" %></td>
         <td><%= link_to 'Mostrar', pedido, class: "btn btn-primary" %></td>
         <td><a href="javascript:window.location.assign('/pedidos/<%=pedido.id%>/edit')" class="btn btn-warning">Editar</a></td>
         <td><%= link_to 'Apagar', pedido, method: :delete, data: { confirm: 'Confirma ?' }, class: "btn btn-danger" %></td>

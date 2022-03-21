@@ -24,7 +24,7 @@
     const preco_unitario = parseFloat($(`#${number_tr}-preco_unitario`).val().replace('R$', '').replace(',', '.'))
     const qtd = parseFloat($(`#${number_tr}-qtd`).val())
     const total = qtd * preco_unitario
-
+    
     if(!total) return  
     $(`#${number_tr}-preco_total`).val(`R$ ${formatarValorRetornado(total)}`)
     
@@ -53,12 +53,12 @@
         $(
         "<tr id='"+nextId+"' class='operacao' >"+ 
           "<td>"+nextId+"</td>"+
-          "<td><input  class='form-control' id='"+nextId+"-cod_produto'    type='text' name='pedido[pedido_item][][cod_produto]'       data-behavior='cod_produto'                              ></td>" +
-          "<td><select class='form-control form-produtos-itens' id='"+nextId+"-descricao'                  name='pedido_item[descricao]'        onclick='atualizaProduto()'  id='pedido_item_descricao'></select></td>" +
-          "<td><input  class='form-control' id='"+nextId+"-qtd'            type='number' name='pedido[pedido_item][][qtd]'                                               data-behavior='qtd'                                      ></td>" +
-          "<td><input  class='form-control' id='"+nextId+"-preco_unitario' type='text' name='pedido[pedido_item][][preco_unitario]'  readonly     min='1'                        data-behavior='preco_unitario'                              ></td>" +
-          "<td><input  class='form-control' id='"+nextId+"-preco_total'    type='text' name='pedido[pedido_item][][preco_total]'   readonly                              data-behavior='preco_total'                              ></td>" +
-          "<td><input  class='form-control' id='"+nextId+"-data_previsao_entrega'    type='date' name='pedido[pedido_item][][data_previsao_entrega]'   data-behavior='data_previsao_entrega'                              ></td>" +
+          "<td><input  class='form-control' id='"+nextId+"-cod_produto' type='text' name='pedido[pedido_item][][cod_produto]' data-behavior='cod_produto'></td>" +
+          "<td><select class='form-control form-produtos-itens' id='"+nextId+"-descricao' name='pedido_item[descricao]' onclick='atualizaProduto()' id='pedido_item_descricao'></select></td>" +
+          "<td><input  class='form-control' id='"+nextId+"-qtd' type='number' name='pedido[pedido_item][][qtd]' min='1' data-behavior='qtd'></td>" +
+          "<td><input  class='form-control' id='"+nextId+"-preco_unitario' type='text' name='pedido[pedido_item][][preco_unitario]' readonly min='0' data-behavior='preco_unitario' ></td>" +
+          "<td><input  class='form-control' id='"+nextId+"-preco_total' type='text' name='pedido[pedido_item][][preco_total]' readonly data-behavior='preco_total'></td>" +
+          "<td><input  class='form-control' id='"+nextId+"-data_previsao_entrega' type='date' name='pedido[pedido_item][][data_previsao_entrega]'bdata-behavior='data_previsao_entrega'></td>" +
           "<td><button type='button' id='"+nextId+"-delete' data-behavior='delete' class='btn btn-danger delete'>x</button></td>" +
         "</tr>"
         )
@@ -135,4 +135,4 @@
 
     return produto
   }
-</script>
+  </script>

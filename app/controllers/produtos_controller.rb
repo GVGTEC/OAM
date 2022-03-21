@@ -133,6 +133,7 @@ class ProdutosController < ApplicationController
 
   def get_by_codigo_produto
     @produto = Produto.find_by(codigo_produto: params[:codigo_produto])
+
     respond_to do |format|
       if @produto.present?
         format.json { render :show, status: :ok, location: @produto }

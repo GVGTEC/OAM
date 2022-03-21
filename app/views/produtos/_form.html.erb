@@ -37,18 +37,18 @@
 
     <div class="row form-group">
         <div class="col-md-12">
-          <%= f.label :descricao, 'Descrição' %>
-          <%= f.text_field :descricao, class: "form-control" %>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <div class="col-md-12">
           <%= f.label :cliente %>
           <%= f.select :cliente_id, 
               Cliente.all.collect{|cliente| [cliente.nome, cliente.id]},
               {:selected => @produto.cliente_id},
               {:class => "form-control"} %>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-12">
+          <%= f.label :descricao, 'Descrição' %>
+          <%= f.text_field :descricao, class: "form-control" %>
         </div>
     </div>
 
