@@ -124,6 +124,7 @@ class ProdutosController < ApplicationController
     produto.localizacao_estoque_id = LocalizacaoEstoque.find_or_create_by(id: localizacao_estoque, empresa_id: empresa.id).id unless localizacao_estoque.zero?
     
     produto.save
+    
   end
 
   def show
