@@ -475,7 +475,6 @@ ActiveRecord::Schema.define(version: 2022_03_13_232058) do
     t.float "quantidade_entregue"
     t.float "preco_unitario"
     t.float "preco_total"
-    t.string "situacao"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "data_previsao_entrega"
@@ -492,7 +491,7 @@ ActiveRecord::Schema.define(version: 2022_03_13_232058) do
     t.datetime "data_previsão_entrega"
     t.float "valor_total"
     t.text "observacao"
-    t.string "situacao"
+    t.string "flag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cliente_id"], name: "index_pedidos_on_cliente_id"

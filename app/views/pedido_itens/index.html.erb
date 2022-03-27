@@ -11,7 +11,7 @@
     <span class="glyphicon glyphicon-list-alt"></span>
     Voltar
   <% end %> 
-  <h3>Pedido Nº <%= @pedido.id %></h3>
+  <h3>Pedido Nº <%= @pedido.id%> - <%= @pedido.cliente.nome%></h3>
   <h3>Itens</h3> 
 </div>
 
@@ -22,8 +22,9 @@
         <th style="width:100px;">Código</th>
         <th style="width:800px;">Descrição</th>
         <th style="width:100px;">Qtde</th>
-        <th style="width:100px;">Preço Unitário</th>
-        <th style="width:100px;">Preço Total</th>
+        <th style="width:100px; text-align: end">Preço Unitário</th>
+        <th style="width:100px; text-align: end">Preço Total</th>
+        <th style="width:100px; text-align: end">Previão Entrega</th>
         <th></th>
       </tr>
     </thead>
@@ -35,6 +36,7 @@
         <td><%= formatar_qtd(pedido_item.quantidade) %></td>
         <td style="text-align: end;"><%= number_to_currency(pedido_item.preco_unitario) %></td>
         <td style="text-align: end;"><%= number_to_currency(pedido_item.preco_total) %></td>
+        <td style="text-align: end;"><%= pedido_item.data_previsao_entrega.strftime("%d-%m-%Y") rescue "" %> </td>
         <td style="text-align: end;"><%= link_to 'Entrega', pedido_pedido_item_entrega_pedidos_path(@pedido, pedido_item), class: "btn btn-primary"  %></td>
       <% end %>
     </tbody>

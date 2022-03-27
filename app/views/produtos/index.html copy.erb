@@ -1,0 +1,58 @@
+<h3>Produtos</h3>
+
+<div class="page-header">
+  <%= link_to new_produto_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    Novo
+  <% end %>
+
+  <%if params[:codigo].present? %>
+    <%= link_to "javascript:history.back()", class: 'btn btn-default' do %>
+      <span class="glyphicon glyphicon-list-alt"></span>
+      Voltar
+    <% end %>
+  <% end %>
+  
+  <h3>Lista</h3>
+</div>
+
+<div style="text-align: right; margin-top:10px; margin-bottom: 15px;">
+  <form action="/produtos" method="get">
+    <div class="row" style="width:300px;display: inline-block;">
+      <div style="float: left">
+        <input type="text" name="descricao" value="<%=params[:descricao] %>" class="form-control" placeholder="Busca..">
+      </div>
+      <div style="float: left;margin-left:5px">
+        <input type="submit" class="btn btn-primary" value="Buscar">
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th style="width:100px;">Código</th>
+        <th style="width:800px;">Descrição</th>
+        <th style="width:100px;">Estoque Atual</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @produtos) do |produto| %>
+        <td style="text-align: end;"><%= produto.id %></td>
+        <td><%= produto.descricao %></td>
+        <td style="text-align: end;"> <%= formatar_qtd(produto.estoque_atual) %></td>
+        <td><%= link_to 'Editar', edit_produto_path(produto) %></td>
+        <td><%= link_to 'Apagar', produto, method: :delete, data: { confirm: 'Confirma ?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="apple_pagination">
+    <%= will_paginate @produtos, :container => false %>
+  </div>  
+</div>

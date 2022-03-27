@@ -16,25 +16,44 @@
   <h3>Lista</h3>
 </div>
 
-
-<div style="margin-bottom: 20px">
-  <form action="/produtos" method="get" data-js="formProduto">
-    <div style="margin-bottom:10px">
-      <label for="cliente">Cliente</label> 
-      <select class="form-control js-example-matcher" id="cliente" name="cliente_id" data-js="selectClientes">
-          <option value=""> </option>
-          <%  Cliente.all.each do |cliente| %>
-            <option value="<%= cliente.id %>" <% if params[:cliente_id] == cliente.id.to_s %> selected <% end %> ><%= cliente.nome %></option>
-          <%  end %>
-      <select>
+<div class="form-group">
+    <%= label :cliente, 'Cliente', class: "col-sm-1 control-label" %>
+    <div class="col-sm-10">
+      <%= select :id, Cliente.all.reorder("nome asc").collect { |cliente| ["#{cliente.nome} - #{cliente.bairro}", cliente.id] }, {:class=> 'form-control'} ) %>
     </div>
+</div>
 
-    <div style="margin-bottom:10px">
-      <label for="produto">Produto</label> 
-      <input type="text" name="descricao" value="<%=params[:descricao] %>" class="form-control">
+<div class="row form-group input-cliente" style="display:none;">
+  <div class="col-md-10">
+    <%= label :cliente, 'Cliente' %>
+    <%= text_field :cliente, class: 'form-control', data: { js: 'clientes'}, onkeyup: 'buscaUsuarios()', value: ""  %>
+    <%= text_field :cliente_id, style: "display: none;" %>
+  </div>
+</div>
+
+<div style="text-align: right; margin-top:10px; margin-bottom:10px">
+  <div style="display: flex; justify-content:inherit">
+    <input type="text" onkeyup: "buscaCfop()" class="form-control">
+  </div>
+</div>
+
+<div class="clientes-encontrados" data-js="clientesEncontrados"></div>
+
+<div style="text-align: right; margin-top:10px; margin-bottom:10px">
+  <form action="/clientes" method="get">
+    <div style="display: flex; justify-content:inherit">
+      <input type="text" style="width: 60%; margin-right: 10px;" name="busca" value="<%=params[:busca] %>" class="form-control" placeholder="Busca..">
+      <input type="submit" class="btn btn-primary" value="Buscar">
     </div>
+  </form>
+</div>
 
-    <input type="submit" class="btn btn-primary" value="Buscar">
+<div style="text-align: right; margin-top:10px; margin-bottom:10px">
+  <form action="/produtos" method="get">
+    <div style="display: flex; justify-content:inherit">
+      <input type="text" style="width: 60%; margin-right: 10px;" name="busca" value="<%=params[:busca] %>" class="form-control" placeholder="Busca Prod..">
+        <input type="submit" class="btn btn-primary" value="Buscar">
+    </div>
   </form>
 </div> 
 
@@ -44,7 +63,7 @@
       <tr>
         <th style="width:100px;">Código</th>
         <th style="width:800px;">Descrição</th>
-        <th style="width:100px; text-align: end;">Estoque Atual</th>
+        <th style="width:100px;">Estoque Atual</th>
         <th></th>
         <th></th>
       </tr>
@@ -52,7 +71,7 @@
 
     <tbody>
       <%= content_tag_for(:tr, @produtos) do |produto| %>
-        <td style="text-align: end;"><%= produto.codigo_produto %></td>
+        <td style="text-align: end;"><%= produto.id %></td>
         <td><%= produto.descricao %></td>
         <td style="text-align: end;"> <%= formatar_qtd(produto.estoque_atual) %></td>
         <td><%= link_to 'Editar', edit_produto_path(produto) %></td>
@@ -77,12 +96,7 @@
     });   
   });
 
-  $(document).on('change', "[data-js='selectClientes']", (e) => {
-    const formProduto = document.querySelector("[data-js='formProduto']")
-    formProduto.submit()
-  })
-
-  const buscaUsuarios = () => {
+  const buscaUsuariosX = () => {
     alert("TESTE 2")
 
     const inputClientes = document.querySelector("[data-js=clientes]")
@@ -115,21 +129,4 @@
     })
 
   });
-
-  $(".js-example-matcher").select2({
-    matcher: matchCustom
-  });
-
-  function matchCustom(params, data) {
-    if ($.trim(params.term) === '') return data
-    if (typeof data.text === 'undefined') return null
-
-    if (data.text.indexOf(params.term) > -1) {
-      var modifiedData = $.extend({}, data, true);
-      modifiedData.text += ' (matched)';
-      return modifiedData;
-    }
-
-    return null;
-  }
 </script>

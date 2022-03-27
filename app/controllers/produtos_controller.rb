@@ -5,7 +5,8 @@ class ProdutosController < ApplicationController
   def index
     @produtos = empresa.produtos
     @produtos = @produtos.order('descricao asc')
-    @produtos = @produtos.where("lower(descricao_complementar) ilike '%#{params[:descricao]}%'") if params[:descricao].present?
+    @produtos = @produtos.where("lower(descricao) ilike '%#{params[:descricao]}%'") if params[:descricao].present?
+    @produtos = @produtos.where(cliente_id: params[:cliente_id]) if params[:cliente_id].present?
     @produtos = @produtos.where(id: params[:codigo]) if params[:codigo].present?
 
     # paginação na view index (lista)
