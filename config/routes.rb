@@ -33,7 +33,11 @@ Rails.application.routes.draw do
   resources :pedidos do
     resources :pedido_itens do
       resources :entrega_pedidos
-    end
+    end   
+  end
+
+  resources :pedido_itens do
+    get 'lista_por_previsao_entrega', on: :collection
   end
 
   resources :nota_fiscais do

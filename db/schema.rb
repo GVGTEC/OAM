@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_232058) do
+ActiveRecord::Schema.define(version: 2022_03_30_013104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(version: 2022_03_13_232058) do
     t.integer "quantidade_final"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "nota_fiscal"
     t.index ["pedido_item_id"], name: "index_entrega_pedidos_on_pedido_item_id"
   end
 

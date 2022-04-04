@@ -1,9 +1,15 @@
 class PedidoItensController < ApplicationController
   before_action :set_pedido_item, only: %i[show edit update destroy]
-  before_action :set_pedido
+  before_action :set_pedido, except: [:lista_por_previsao_entrega]
 
   def index
     @pedido_itens = PedidoItem.where(pedido_id: @pedido.id)
+  end
+
+  def lista_por_previsao_entrega
+    @pedido_itens = PedidoItem.all
+
+    #debugger
   end
 
   # helper_method :getPedidoItens
