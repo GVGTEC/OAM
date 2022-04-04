@@ -7,7 +7,11 @@ class PedidoItensController < ApplicationController
   end
 
   def lista_por_previsao_entrega
-    @pedido_itens = PedidoItem.all
+    @pedido_itens = PedidoItem.all.order("data_previsao_entrega ASC")
+
+    #@pedidos.itens = @pedidos.itens.order("data_previsao_entrega ASC")
+
+    # EM MovimentoEstoquesController TEM A ROTINA PARA FILTRAR POR DATA
 
     #debugger
   end
